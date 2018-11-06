@@ -132,4 +132,63 @@
             return deptAll;
         }
             
+### mybatis分页插件
+    
+     1.引入PageHelper的jar包
+        <!--整合分页-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.2.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
         
+     2.配置文件写入以下配置代码
+        logging.level.com.example.demo.dao=DEBUG
+        pagehelper.helperDialect=mysql
+        pagehelper.reasonable=true
+        pagehelper.supportMethodsArguments=true
+        pagehelper.params=count=countSql
+        pagehelper.page-size-zero=true
+        
+     3.书写分页代码
+        public PageInfo<DeptEntity> getAllPageInfo(int page,int pageSize) {
+             Page<Object> objects = PageHelper.startPage(page, pageSize);
+             List<DeptEntity> deptAll = deptMapper01.getAll();
+             PageInfo<DeptEntity> pageInfo = new PageInfo<>(deptAll);
+             return pageInfo;
+         }
+         
+### 扫包优化
+
+    @SpringBootApplication=@ComponentScan+@EnableAutoConfiguration
+    
+### java -jar xxx.jar中没有主清单属性解决方法
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.adu.SpringbootStudyApplication</mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    
+### 压力测试使用软件 apache jmeter
+    
+    下载地址：链接：https://pan.baidu.com/s/1YLdY-0M7tZkwnlDQHZG9Kw 提取码：d5xt 
+         

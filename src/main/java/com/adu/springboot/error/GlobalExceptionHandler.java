@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * 设置全局异常处理类
  */
-@ControllerAdvice(basePackages = {"com.adu.springboot.controller"})
+@ControllerAdvice(basePackages = {"com.adu.springboot.controller","com.adu.testdatasource.controller"})
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(RuntimeException.class)
